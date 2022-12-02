@@ -1,0 +1,62 @@
+@charset "UTF-8";
+ .msg {
+    box-shadow: none;
+    background-color: #ffa5ee;
+ }
+ .invert {
+      filter: invert(95%);
+      display: block;
+      margin: 0 auto;
+      /* height: auto; */
+      width: 40%;
+   }
+   header {
+      margin: 0;
+   }
+   
+   body {
+      filter: hue-rotate(212deg);
+      /* background-color: #2a37db; */
+      background-color: #242943;
+   }
+   input[type="text"], input[type="password"], input[type="checkbox"] {
+      /* background-color: #ffa5ee; */
+      color: white;
+      background-color: #0a0a0aa3;
+      border-radius: 15px;
+   }
+   .field,
+   .actions {
+      display: flex;
+      justify-content: center;
+   }
+   .t input {
+      width: 40%;
+   }
+
+   .fit {
+      filter: invert(30%) opacity(100%);
+      background-color: none;
+   }
+     .invert {
+      filter: invert(100%);
+      display: block;
+      margin: 0 auto;
+      height: auto;
+      width: 25%;
+   }
+   select {
+      width: 20%;
+   }
+   .inner {
+      display: flex;
+      justify-content: center;
+   }
+
+   textarea {
+      width: 75%;
+      height: 19vh;
+   }
+   .option {
+         width: 30%;
+   }

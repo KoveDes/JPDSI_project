@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet name="css/main.css" library="template" />
+	<h:outputStylesheet name="css/style.css" library="template" />
+	<h:outputStylesheet name="css/noscript.css" library="template" />
+	<h:outputStylesheet name="css/user.css" library="template" />
+	<link type="image/x-icon" rel="shortcut icon"
+		href="#{resource['template:images/favicon.ico']}" />
+
+	<title><ui:insert name="title"></ui:insert></title>
+</h:head>
+
+<h:body>
+	<div id="wrapper" style="position: flex; justify-content: center;">
+		<h:outputLink value="index.jsf">
+			<h:graphicImage value="#{resource['template:images/ico.png']}"
+				class="invert logo" alt="" />
+		</h:outputLink>
+		<header id="header" class="alt"> <nav> <p:button
+			id="basic" styleClass="fixed" value="Menu" type="button"
+			onclick="PF('dlg1').show()"
+			style="margin: 20px; background-color:white;color:black" /></nav> </header>
+
+		<p:overlayPanel for='basic' style="background-color:#14214328;">
+			<ul styleClass="links"
+				style="text-align: center; list-style-type: none;">
+				<span styleClass="login" style="font-size:20px; color: #00ffd0">user.name</span>
+				<li><p:linkButton value="ustawienia konta" outcome="userSettings.jsf"
+						style="margin-top: 25px" /></li>
+				<li><p:button type="button" value="Wyloguj się"
+						onclick="#{user.doLogout()}" style="margin-top: 10px" /></li>
+			</ul>
+		</p:overlayPanel>
+
+		<div id="main">
+			<ui:insert name="header">
+			</ui:insert>
+			<ui:insert name="content">
+			</ui:insert>
+		</div>
+	</div>
+
+</h:body>
+
+
+
+
+</html>

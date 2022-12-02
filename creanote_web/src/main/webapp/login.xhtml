@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/form-template.xhtml">
+	<ui:define name='content'>
+		<footer id="x">
+		<div class="inner">
+			<h:form id="login">
+				<p:growl id="msg" />
+				<div class="fields">
+
+					<div class="field t">
+						<p:inputText value="#{loginBB.login}" id="login"
+							placeholder="login" requiredMessage="Nie podano loginu" required="true">
+							<f:validateDoubleRange minimum="250" />
+						</p:inputText>
+						<p:message for="login" />
+					</div>
+					<div class="field t">
+						<p:password id="password" value="#{loginBB.password}"
+							required="true" placeholder="Hasło"
+							requiredMessage="Podaj hasło!" />
+						<p:message for="password" />
+					</div>
+					<div class="field">
+						<ul class="actions">
+							<li><p:commandButton value="Zaloguj się"
+									action="#{loginBB.doLogin()}" update="@form" class="primary" /></li>
+							<li><p:linkButton value="Załóż konto" outcome="register"
+									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
+						</ul>
+					</div>
+				</div>
+
+			</h:form>
+		</div>
+		</footer>
+	</ui:define>
+	
+	<ui:define name="title">| Logowanie</ui:define>
+</ui:composition>
+</html>

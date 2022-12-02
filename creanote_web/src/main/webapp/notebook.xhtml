@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="/templates/user-template.xhtml">
+
+	<ui:define name="title"></ui:define>
+
+	<ui:define name="header">
+		<div class="inner">
+			<header class="major">
+			<h1>${notebook.title}Tytuł</h1>
+			<p:button styleClass="primary" value="Moje notesy"
+				outcome="notebooks"
+				style="margin-right: 20px; background-color: #1cd78b" /> <p:button
+				styleClass="primary" value="Dodaj notatkę" outcome="note" /> </header>
+			<h:form id="form">
+				<p:outputLabel for="@next" value="Szukaj notatek wg. kategorii" />
+				<div class="field">
+					<p:selectOneMenu id="option"
+						value="#{selectOneMenuView.selectedOption}">
+						<f:selectItem itemLabel="wszystkie" itemValue="" />
+						<f:selectItem itemLabel="Praca" itemValue="praca" />
+						<f:selectItem itemLabel="Nauka" itemValue="nauka" />
+						<f:selectItem itemLabel="Zdrowie" itemValue="zdrowie" />
+						<f:selectItem itemLabel="Fitness" itemValue="fitness" />
+						<f:selectItem itemLabel="Relacje" itemValue="relacje" />
+						<f:selectItem itemLabel="Inne" itemValue="inne" />
+					</p:selectOneMenu>
+				</div>
+				<div class="field">
+					<p:linkButton value="Anuluj" outcome="notebook" />
+
+				</div>
+				<div style="margin-top: 10px">
+					<p:commandButton value="Szukaj" action="#{notebook.search()}"
+						update="@([id$=notes])" />
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+
+	<ui:define name='content'>
+		<div styleClass="inner" style="text-align:center;">
+			<h:form style="width: 80%; positon: absolute;left: 50px; transform: translateX(10%);" >
+				<p:dataTable var="n" value="#{notebook.list}" id="notes">
+					<p:column headerText="Nazwa">
+						<h:outputText value="#{n.nazwa}" />
+					</p:column>
+
+					<p:column headerText="Kategoria">
+						<h:outputText value="#{n.ilosc_notatek}" />
+					</p:column>
+					
+					<p:column headerText="Korzystano">
+						<h:outputText value="#{n.ilosc_notatek}" />
+					</p:column>
+
+					<p:column headerText="Opcje">
+						<outputText styleClass="public" value="publiczna"
+							rendered="#{n.publiczny == true}" />
+						<span> </span>
+						<p:commandButton value="Usuń"
+							action="#{notebook.delete(notebook)}" style="margin-top: 10px" />
+						<span> </span>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h2 rendered="#{!notebook.list}">Nie posiadasz żadnych notatek!
+				Skorzystaj z przycisku "DODAJ NOTATKĘ"</h2>
+
+
+		</div>
+	</ui:define>
+</ui:composition>
+
+
+</html>

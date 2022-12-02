@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="/templates/user-template.xhtml">
+
+	<ui:define name="title">Ustawienia</ui:define>
+
+
+	<ui:define name="header">
+		<div class="inner">
+			<header styleClass="major" style="margin-bottom: -30px">
+			<h1>
+				Ustawienia konta <span style="color: #8daa0c">nazwa
+					użytkownika</span>
+			</h1>
+			</header>
+		</div>
+		<div class="inner">
+
+			<article>
+			<ul class="actions">
+				<li><p:button rendered="#{user.role != 'admin'}"
+						styleClass="primary" value="Moje notesy" outcome="notebooks" style="background-color: #1cd78b"/></li>
+				<li><p:button id="changePassword" styleClass="primary"
+						value="Zmień hasło" onclick="PF('changePassword').show()" /></li>
+				<li><p:button value="Usuń konto" styleClass="primary delete"
+						onclick="#{user.delete()}" style="background-color:black; color: white;" /></li>
+			</ul>
+			<p:dialog widgetVar="changePassword" minHeight="40" width="350"
+				showEffect="fade">
+				<h:form>
+					<div class="fields">
+						<div class="field t">
+							<p:outputLabel for="password-1" value="nowe hasło"
+								style="color:black" />
+							<p:password id="password-1" value="#{da}" match="password-2"
+								required="true" placeholder="Hasło"
+								requiredMessage="Podaj hasło!" style="color:black" />
+							<p:message for="password-1" />
+						</div>
+						<div class="field t">
+							<p:outputLabel for="password-1" value="potwierdz hasło"
+								style="color:black" />
+							<p:password id="password-2" value="#{da}" required="true"
+								placeholder="Hasło" requiredMessage="Potwierdz hasło!"
+								style="color:black" />
+							<p:message for="password-2" />
+						</div>
+
+					</div>
+					<p:commandButton value="Zapisz" action="#{user.changePassword()}"
+						update="@form" />
+				</h:form>
+			</p:dialog> 
+			<header class="major">
+			<h2>Statystyki:</h2>
+			<p>
+				Rodzaj konta: <span style="color: rgb(9, 255, 0)">#{user.name}</span>
+			</p>
+			<p>
+				Utworzone: <span style="color: rgb(9, 255, 0)">#{user.data_utworzenia}</span>
+			</p>
+			<p>
+				Liczba notesów:<span style="color: rgb(9, 255, 0)">
+					#{user.liczba_notesow}</span>
+			</p>
+			</header> </article>
+		</div>
+	</ui:define>
+
+	<ui:define name='content'>
+
+	</ui:define>
+</ui:composition>
+
+
+</html>

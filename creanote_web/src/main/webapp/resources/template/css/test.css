@@ -1,0 +1,12 @@
+body {
+	background: url("../images/cat_bg.jpg.jsf?ln=template") no-repeat center center;
+	background-size: cover;
+	margin: 100px;
+}
+.space {
+	margin: 20px;
+}
+
+#wrapper {
+	margin: 20px 0;
+}

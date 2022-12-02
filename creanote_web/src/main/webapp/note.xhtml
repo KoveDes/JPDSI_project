@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/form-template.xhtml">
+
+	<ui:define name="title">Notatka</ui:define>
+
+	<ui:define name='content'>
+		<footer id="x">
+		<div class="inner">
+			<h:form>
+				<div class="fields">
+					<div class="field t">
+						<p:inputText value="#{registration.login}" id="title"
+							placeholder="Tytuł" requiredMessage="Nie podano tytułu"
+							required="true" style="background-color: #3b14149e;color:black; border: 1px solid #7c91a500;">
+						</p:inputText>
+						<p:message for="title" />
+					</div>
+					<div class="field ">
+						<div class="col-12 md:col-6 lg:col-4 xl:col-3">
+							<p:selectOneListbox id="basic" value="#{selectOneView.option} " style="background-color: #3b14149e; border: 1px solid #7c91a500;"
+								scrollHeight="125">
+								<f:selectItem itemLabel="Praca" itemValue="praca" />
+								<f:selectItem itemLabel="Nauka" itemValue="nauka" />
+								<f:selectItem itemLabel="Zdrowie" itemValue="zdrowie" />
+								<f:selectItem itemLabel="Fitness" itemValue="fitness" />
+								<f:selectItem itemLabel="Relacje" itemValue="relacje" />
+								<f:selectItem itemLabel="Inne" itemValue="inne" />
+							</p:selectOneListbox>
+						</div>
+
+					</div>
+					<div class="field">
+						<p:inputTextarea rows="2" cols="13" style="background-color: #3b14149e; border: 1px solid #7c91a500;"/>
+					</div>
+					<div class="field">
+							
+							<p:toggleSwitch value="" id="public" />
+							<p:outputLabel for="public" value="Notatka publiczna"
+								style="font-size: 0.9em; color: white; margin-left: 10px" />
+						</div>
+					<div class="field">
+						<ul class="actions">
+							<li><p:commandButton value="Zapisz"
+									action="#{registration.createAccount()}" update="@form"
+									class="primary" /></li>
+							<li><p:linkButton value="Anuluj" outcome="notebook"
+									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
+						</ul>
+					</div>
+				</div>
+				<p:growl id="msg" />
+			</h:form>
+		</div>
+		</footer>
+	</ui:define>
+</ui:composition>
+
+
+</html>

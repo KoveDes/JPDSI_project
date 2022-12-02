@@ -1,0 +1,151 @@
+   #category {
+      width: 30%;
+   }
+   input[type="text"].login {
+      width: 40%;
+   }
+   
+   @keyframes vibrate 
+   {
+         0% {
+            transform: rotate(0deg) skew(5deg, 5deg);
+            background-color: red;
+
+         }
+
+         10% {
+            transform: rotate(-5deg);
+         }
+
+         20% {
+            transform: rotate(5deg);
+         }
+
+         30% {
+            transform: rotate(0deg);
+         }
+
+         40% {
+            transform: rotate(5deg);
+         }
+
+         50% {
+            transform: rotate(-4deg) skew(-3deg, -4deg);
+            background-color:blue;
+         }
+
+         60% {
+            transform: rotate(7deg);
+         }
+
+         70% {
+            transform: rotate(-1deg);
+         }
+
+         80% {
+            transform: rotate(-5deg);
+         }
+
+         90% {
+            transform: rotate(3deg);
+         }
+
+         100% {
+            transform: rotate(0deg) skew(5deg, 5deg);
+            background-color: red;
+         }
+   }
+   .show {
+         animation: vibrate 5s;
+         animation-delay: 2.5s;
+         animation-iteration-count: infinite;
+         width: 40%;
+   }
+   .iframe {
+      display: block;
+      position: fixed;
+      width: 50%;
+      height: 50vh;
+      top:0;
+      left:0;
+   }
+   
+   .invert {
+      filter: invert(100%);
+      display: block;
+      margin: 0 auto;
+      height: auto;
+      width: 25%;
+
+   }
+
+   .role {
+      display: block;
+      color: #000;
+   }
+
+ .button {
+       display: block;
+       width: 25%;
+       border-width: 0px;
+       margin-bottom: 15px;
+    }
+    #changepass {
+       display: none;
+    }
+
+
+   .logo {
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      z-index: 1000;
+      transform-origin: top left;
+      width: 7.5%;
+   }
+
+   html {
+      filter: brightness(100%) opacity(100%) sepia(0) grayscale(0%);
+      /* background-color: #2a37db; */
+    
+   }
+   #wrapper {
+      /* filter: hue-rotate(15deg); */
+   }
+
+   .field .actions {
+      display: flex;
+      /* justify-content: left; */
+   }
+
+   .fit-out {
+      filter: opacity(80%);
+      width: 75%;
+      height: 80%;
+      margin-top: -20px;
+
+   }
+
+   .optionary {
+      color: rgb(0, 0, 0);
+      border-radius: 5px;
+      background-color: rgb(23, 204, 53);
+      opacity: 25%;
+      height: 1.45em;
+
+   }
+
+   .optionary:hover {
+      opacity: 100%;
+   }
+
+   .delete {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      text-decoration: none;
+   }
+   .public {
+      color: #fff;
+      border-radius: 5px;
+      background-color: rgb(204, 23, 23);
+   }

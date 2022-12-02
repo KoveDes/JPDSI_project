@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Witaj w CreaNote</title>
+	<h:outputStylesheet name="css/main.css" library="template" />
+	<h:outputStylesheet name="css/style.css" library="template" />
+	<h:outputStylesheet name="css/noscript.css" library="template" />
+	<h:outputStylesheet name="css/mainPage.css" library="template" />
+	<link type="image/x-icon" rel="shortcut icon"
+		href="#{resource['template:images/favicon.ico']}" />
+</h:head>
+<h:body>
+	<div id="wrapper" class="">
+		<h:outputLink value="index.jsf">
+			<h:graphicImage value="#{resource['template:images/ico.png']}"
+				class="invert logo" alt="" />
+		</h:outputLink>
+		<section class="">
+		<div class="inner">
+			<header class="major">
+			<h1>Witaj w CreaNote</h1>
+			</header>
+			<div class="content">
+				<ul class="actions">
+					<li><p:linkButton rendered="#{user.role == null}"
+							value="Załóż konto" outcome="register" class=" primary" /></li>
+					<li><p:linkButton rendered="#{user.role == null}"
+							value="Zaloguj się" outcome="login" class="fit primary" /></li>
+					<li><p:linkButton rendered="#{user.role == 'admin'}"
+							value="Panel administracyjny" outcome="adminPage" class="primary" /></li>
+					<li><p:linkButton
+							rendered="#{(user.role != 'admin') and (user.role != null)}"
+							value="Twoje notesy" class=" primary " /></li>
+					<li><p:commandButton type="button"
+							rendered="#{user.role != null}" value="Wyloguj się"
+							onclick="#{user.doLogout()}" class=" fit primary " /></li>
+				</ul>
+			</div>
+
+		</div>
+		</section>
+	</div>
+	<div id="main">
+		<section id="one" class="tiles"> <article> <span
+			class="image"> <h:graphicImage
+				value="#{resource['template:images/pic02.jpg']}" alt="" />
+		</span> <header class="major">
+		<h3>Twórz notesy i notatki</h3>
+		<p>Możesz posiadać nieskończoną ilość notesów i notatek!</p>
+		</header> </article> <article class="notes"> <header class="main">
+		<h3>Notatki publiczne</h3>
+		</header> <header class="notes_public"> <ui:repeat value="#{calcBB}" var="n">
+			<div class="iframe">
+				<h3>#{n.nazwa}</h3>
+				<p class="category">
+					Kategoria: <span>#{n.kategoria}</span>
+				</p>
+				<p class="content">#{n.tresc}</p>
+			</div>
+		</ui:repeat> </header> </article> <article> <span class="image"> <h:graphicImage
+				value="#{resource['template:images/pic07.jpg']}" alt="" />
+		</span> <header class="major">
+		<h3>Konto CreaNote+</h3>
+		<p>Zakładając konto premium zyskujesz dostęp do niesamowitego
+			wyglądu, animacji i rozszerzonych możliwości CreaNote! (np. kategorie
+			notatek!)</p>
+		</header> </article> <article> <span class="image"> <h:graphicImage
+				value="#{resource['template:images/pic09.jpg']}" alt="" />
+		</span> <header class="major">
+		<h3>Statystyki</h3>
+		<p>#{stats.users} użytkowników</p>
+		<p>#{stats.notebooks} notesów</p>
+		<p>#{stats.notes} notatek</p>
+		</header> </article> </section>
+
+
+	</div>
+	<h:outputScript library="template" name="js/jquery.min.js" />
+	<h:outputScript library="template" name="js/jquery.scrolly.min.js" />
+	<h:outputScript library="template" name="js/jquery.scrollex.min.js" />
+	<h:outputScript library="template" name="js/jquery.scrollex.min.js" />
+	<h:outputScript library="template" name="js/browser.min.js" />
+	<h:outputScript library="template" name="js/breakpoints.min.js" />
+	<h:outputScript library="template" name="js/util.js" />
+	<h:outputScript library="template" name="js/main.js" />
+</h:body>
+
+</html>
