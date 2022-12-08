@@ -31,9 +31,10 @@ public class UzytkownikDAO {
 	}
 	
 	public List<Uzytkownik> getFullList() {
+
 		List<Uzytkownik> list = null;
 
-		Query query = em.createQuery("select u from Person p");
+		Query query = em.createQuery("select u from Uzytkownik u");
 
 		try {
 			list = query.getResultList();
@@ -43,4 +44,11 @@ public class UzytkownikDAO {
 
 		return list;
 	}
+	
+//	public List<Uzytkownik> findByLogin() {
+//		List<Uzytkownik> list = null;
+//	}
+	//find
+	//getUserfromLogin(
+	
 }
