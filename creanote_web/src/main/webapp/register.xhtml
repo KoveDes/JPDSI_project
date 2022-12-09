@@ -10,7 +10,7 @@
 
 <ui:composition template="/templates/form-template.xhtml">
 
-<ui:define name="title">| Rejestracja</ui:define>
+	<ui:define name="title">Rejestracja</ui:define>
 
 	<ui:define name='content'>
 		<footer id="x">
@@ -18,28 +18,37 @@
 			<h:form id="register">
 				<p:growl id="msg" />
 				<div class="fields">
-
 					<div class="field t">
-						<p:inputText value="#{registration.login}" id="login"
-							placeholder="login" requiredMessage="Nie podano loginu!" required="true">
-							<f:validateDoubleRange minimum="250" />
+						<p:inputText value="#{registerBB.uzytkownik.login}" id="login"
+							placeholder="login" required="true"
+							requiredMessage="Nie podano loginu!"
+							validatorMessage="Login musi mieć conajmniej 4 znaki">
+							<f:validateLength minimum="4" />
+
 						</p:inputText>
 						<p:message for="login" />
 					</div>
 					<div class="field t">
-						<p:password id="password-1" value="#{registration.password}"
-							match="password-2" required="true" placeholder="Hasło"
-							requiredMessage="Podaj hasło!" />
+						<p:password id="password-1" value="#{registerBB.uzytkownik.haslo}"
+							required="true" placeholder="Hasło"
+							requiredMessage="Podaj hasło!"
+							validatorMessage="Hasło muszą się zgadzać" match="password-2">
+							<f:validateLength minimum="4" />
+
+						</p:password>
 						<p:message for="password-1" />
 					</div>
 					<div class="field t">
-						<p:password id="password-2" value="#{registration.password}"
-							required="true" placeholder="Hasło" />
+						<p:password id="password-2" value="#{registerBB.uzytkownik.haslo}"
+							required="true" placeholder="Powtórz hasło"
+							requiredMessage="Nie powtórzono hasła!"
+							validatorMessage="Hasło musi mieć min. 4 znaki!">
+							<f:validateLength minimum="4" />
+						</p:password>
 						<p:message for="password-2" />
 					</div>
 					<div class="field">
-						<p:toggleSwitch value="#{registration.premium}" id="premium">
-							<p:ajax listener="#{registration.addMessage}" update="msg" />
+						<p:toggleSwitch value="#{registerBB.premium}" id="premium">
 						</p:toggleSwitch>
 						<p:outputLabel for="premium"
 							value="Chcę zostać użytkownikiem CreaNote+"
@@ -48,15 +57,15 @@
 					<div class="field">
 						<ul class="actions">
 							<li><p:commandButton value="Zarejestruj"
-									action="#{registration.createAccount()}" update="@form"
+									action="#{registerBB.createAccount()}" update="@form"
 									class="primary" /></li>
 							<li><p:linkButton value="Mam już konto" outcome="login"
 									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
 						</ul>
 					</div>
 				</div>
-
 			</h:form>
+			
 		</div>
 		</footer>
 	</ui:define>

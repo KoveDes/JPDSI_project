@@ -26,8 +26,6 @@ public class Note implements Serializable {
 
 	private byte publiczna;
 
-	@Column(name="`userid(obcy)`")
-	private int userid_obcy_;
 
 	//bi-directional many-to-one association to Notatka
 	@OneToMany(mappedBy="note")
@@ -71,14 +69,6 @@ public class Note implements Serializable {
 
 	public void setPubliczna(byte publiczna) {
 		this.publiczna = publiczna;
-	}
-
-	public int getUserid_obcy_() {
-		return this.userid_obcy_;
-	}
-
-	public void setUserid_obcy_(int userid_obcy_) {
-		this.userid_obcy_ = userid_obcy_;
 	}
 
 	public List<Notatka> getNotatkas() {

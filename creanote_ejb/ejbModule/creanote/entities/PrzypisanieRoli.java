@@ -28,12 +28,12 @@ public class PrzypisanieRoli implements Serializable {
 
 	//bi-directional many-to-one association to Rola
 	@ManyToOne
-	@JoinColumn(name="idrola")
+	@JoinColumn(name="idrola", insertable = false, updatable = false)
 	private Rola rola;
 
 	//bi-directional many-to-one association to Uzytkownik
 	@ManyToOne
-	@JoinColumn(name="iduzytkownik")
+	@JoinColumn(name="iduzytkownik", insertable = false, updatable = false)
 	private Uzytkownik uzytkownik;
 
 	public PrzypisanieRoli() {

@@ -32,7 +32,7 @@ public class Notatka implements Serializable {
 
 	private byte publiczna;
 
-	private Object tresc;
+	private String tresc;
 
 	//bi-directional many-to-one association to Note
 	@ManyToOne
@@ -94,7 +94,7 @@ public class Notatka implements Serializable {
 		return this.tresc;
 	}
 
-	public void setTresc(Object tresc) {
+	public void setTresc(String tresc) {
 		this.tresc = tresc;
 	}
 
