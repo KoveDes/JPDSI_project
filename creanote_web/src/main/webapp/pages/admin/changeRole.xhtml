@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewAction action="#{roleEdit.onLoad()}" />
+</f:metadata>
+
+
+<ui:composition template="/templates/form-template.xhtml">
+
+	<ui:define name="title">#{txtAdmin.CRTitle}</ui:define>
+
+	<ui:define name='content'>
+		<footer id="x">
+		<div class="inner">
+			<h1>
+				#{txtAdmin.CRUser}: <span style="color: #00c9ff;">
+					#{roleEdit.przypisanieRoli.uzytkownik.login}</span>
+			</h1>
+			<h:form>
+				<div class="fields">
+					<div class="field ">
+						<div>
+							<p:selectOneListbox id="basic" require="true"
+								style="background-color: #3b14149e; border: 1px solid #7c91a500;"
+								value="#{roleEdit.przypisanieRoli.id.idrola}">
+								<f:selectItem itemLabel="user" itemValue="3" />
+								<f:selectItem itemLabel="premium" itemValue="2" />
+								<f:selectItem itemLabel="admin" itemValue="1" />
+							</p:selectOneListbox>
+						</div>
+					</div>
+					<div class="field">
+						<ul class="actions">
+							<li><p:commandButton value="#{txtAdmin.save}"
+									action="#{roleEdit.saveData()}" update="@form" class="primary" /></li>
+							<li><p:linkButton value="#{txtAdmin.cancelButton}" outcome="admin"
+									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
+						</ul>
+					</div>
+				</div>
+				<p:growl id="msg" />
+			</h:form>
+		</div>
+		</footer>
+	</ui:define>
+</ui:composition>
+
+
+</html>
