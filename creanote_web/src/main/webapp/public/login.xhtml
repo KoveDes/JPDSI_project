@@ -15,22 +15,23 @@
 
 					<div class="field t">
 						<p:inputText value="#{loginBB.login}" id="login"
-							placeholder="login" requiredMessage="Nie podano loginu" required="true">
-							<f:validateDoubleRange minimum="250" />
+							placeholder="login" requiredMessage="#{txtLogin.loginRequired}"
+							required="true">
 						</p:inputText>
 						<p:message for="login" />
 					</div>
 					<div class="field t">
 						<p:password id="password" value="#{loginBB.password}"
-							required="true" placeholder="Hasło"
-							requiredMessage="Podaj hasło!" />
+							required="true" placeholder="#{txtLogin.password}"
+							requiredMessage="#{txtLogin.passwordRequired}" />
 						<p:message for="password" />
 					</div>
 					<div class="field">
 						<ul class="actions">
-							<li><p:commandButton value="Zaloguj się"
-									action="#{loginBB.doLogin()}" update="@form" class="primary" /></li>
-							<li><p:linkButton value="Załóż konto" outcome="register"
+							<li><p:commandButton value="#{txtLogin.logIn}"
+									action="#{loginBB.doLogin()}" update="msg" class="primary" /></li>
+							<li><p:linkButton value="#{txtLogin.createAccount}"
+									outcome="/public/register"
 									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
 						</ul>
 					</div>
@@ -40,7 +41,7 @@
 		</div>
 		</footer>
 	</ui:define>
-	
-	<ui:define name="title">| Logowanie</ui:define>
+
+	<ui:define name="title"> #{txtLogin.title}</ui:define>
 </ui:composition>
 </html>

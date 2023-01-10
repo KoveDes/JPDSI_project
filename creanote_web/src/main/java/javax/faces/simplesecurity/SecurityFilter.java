@@ -3,6 +3,7 @@ package javax.faces.simplesecurity;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -184,6 +185,7 @@ public class SecurityFilter implements Filter {
 		} else { // if request is valid (client is logged in) then
 			chain.doFilter(request, response);
 		}
+	   
 
 	}
 

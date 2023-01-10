@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewAction action="#{singleNoteBookBB.onLoad()}" />
+</f:metadata>
+
+<ui:composition template="/templates/user-template.xhtml">
+
+	<ui:define name="title">#{txtNotes.notebook}: #{singleNoteBookBB.note.nazwa}</ui:define>
+
+	<ui:define name="header">
+		<div class="inner">
+			<header class="major">
+			<h1>#{singleNoteBookBB.note.nazwa}</h1>
+			<p:button styleClass="primary" value="#{txtNotes.myNotebooks}"
+				outcome="notebooks"
+				style="margin-right: 20px; background-color: #1cd78b" /> <h:form>
+				<p:commandButton styleClass="primary" value="#{txtNotes.addNote}"
+					action="#{singleNoteBookBB.createNotatka()}" />
+			</h:form></header>
+
+			<div class="content">
+				<h:form id="log">
+					<div class="fields">
+						<div class="field">
+							<p:inputText value="#{singleNoteBookBB.nazwa}"
+								placeholder="#{txtNotes.name}" requiredMessage="#{txtNotes.nameRequiredSearch}"
+								required="true" style="width: 30%">
+							</p:inputText>
+						</div>
+						<div class="field">
+							<p:commandButton value="#{txtNotes.search}" update="form-table" />
+							<p:linkButton value="#{txtNotes.cancel}" outcome="notebook" />
+						</div>
+					</div>
+				</h:form>
+				<p:messages />
+			</div>
+
+		</div>
+	</ui:define>
+
+	<ui:define name='content'>
+		<div styleClass="inner" style="text-align: center;">
+			<h:form id="form-table"
+				style="width: 80%; positon: absolute;left: 50px; transform: translateX(10%);">
+				<p:dataTable rendered="#{!singleNoteBookBB.list.isEmpty()}" var="n"
+					value="#{singleNoteBookBB.list}" id="notes">
+					<p:column headerText="#{txtNotes.name}">
+						<h:commandButton value="#{n.nazwa}" style="color: #4482d8;"
+							action="#{singleNoteBookBB.editNotatka(n)}" />
+
+					</p:column>
+
+					<p:column headerText="#{txtNotes.category}">
+						<h:outputText value="#{n.kategoria}" />
+					</p:column>
+
+					<p:column headerText="#{txtNotes.use}">
+						<h:outputText value="#{n.dataModyfikacji}" />
+					</p:column>
+
+					<p:column headerText="#{txtNotes.content}">
+						<h:outputText value="#{n.tresc}" />
+					</p:column>
+
+					<p:column headerText="#{txtNotes.options}">
+						<p:commandButton value="#{txtNotes.delete}"
+							action="#{singleNoteBookBB.deleteNotatka(n)}" update="@form"
+							style="margin-top: 10px" />
+						<span> </span>
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+			<p:panel rendered="#{singleNoteBookBB.list.isEmpty()}">#{txtNotes.noNotes}</p:panel>
+
+			<p:growl id="msg" />
+		</div>
+	</ui:define>
+</ui:composition>
+
+
+</html>

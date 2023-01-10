@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/templates/user-template.xhtml">
+
+	<ui:define name="title">#{txtNotes.title}</ui:define>
+
+	<ui:define name="header">
+		<div class="inner">
+			<header styleClass="major">
+			<h1>#{txtNotes.title}</h1>
+			</header>
+			<div styleClass="content">
+				<p:button id="add" styleClass="button primary" value="#{txtNotes.createNotebook}"
+					type="button" onclick="PF('add').show()" />
+			</div>
+			<p:dialog widgetVar="add" minHeight="40" width="350"
+				showEffect="fade">
+				<h:form>
+					<div class="fields">
+						<div class="field t">
+							<p:outputLabel for="name" value="#{txtNotes.notebookName}"
+								style="color:black" />
+							<p:inputText value="#{notebookBB.note.nazwa}" id="name"
+								placeholder="${txtNotes.name}" requiredMessage="#{txtNotes.requiredName}"
+								required="true">
+							</p:inputText>
+						</div>
+						<div class="field">
+							<p:outputLabel for="public" value="#{txtNotes.publicNotebook}"
+								style="font-size: 0.9em; color: black" />
+							<p:toggleSwitch value="#{notebookBB.publicNote}" id="public" />
+						</div>
+					</div>
+					<p:commandButton value="#{txtNotes.save}"
+						action="#{notebookBB.createNotebook()}" update="tabela msg" />
+
+					<p:growl id="msg" />
+				</h:form>
+			</p:dialog>
+		</div>
+	</ui:define>
+
+	<ui:define name='content'>
+		<p:growl id="msg1" />
+		<div styleClass="inner">
+			<p:panel rendered="#{notebookBB.list.isEmpty()} and remoteClient.isInRole('premium')">#{txtNotes.noNotebooks}
+				</p:panel>
+
+			<h:form rendered="#{!notebookBB.list.isEmpty()}" id="tabela">
+
+				<p:dataTable var="n" value="#{notebookBB.list}" editable="true">
+					<p:column headerText="#{txtNotes.name}">
+						<h:commandButton value="#{n.nazwa}"
+							action="#{notebookBB.enterNotebook(n)}" style="color: #4482d8;" />
+					</p:column>
+
+					<p:column headerText="#{txtNotes.notesCount}">
+						<h:outputText value="#{n.iloscNotatek}" />
+					</p:column>
+
+					<p:column headerText="#{txtNotes.public}">
+						<h:outputText value="#{n.publiczna}" />
+					</p:column>
+					<p:column headerText="#{txtNotes.options}">
+						<h:commandButton action="#{notebookBB.deleteNotebook(n)}"
+							styleClass="optionary" value="#{txtNotes.delete}"
+							style="color: #db3d3d; margin-top: 5px;" />
+						<span> </span>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+
+
+		</div>
+	</ui:define>
+</ui:composition>
+
+
+</html>

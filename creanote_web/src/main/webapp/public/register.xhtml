@@ -10,7 +10,7 @@
 
 <ui:composition template="/templates/form-template.xhtml">
 
-	<ui:define name="title">Rejestracja</ui:define>
+	<ui:define name="title">#{txtRegister.title}</ui:define>
 
 	<ui:define name='content'>
 		<footer id="x">
@@ -21,8 +21,8 @@
 					<div class="field t">
 						<p:inputText value="#{registerBB.uzytkownik.login}" id="login"
 							placeholder="login" required="true"
-							requiredMessage="Nie podano loginu!"
-							validatorMessage="Login musi mieć conajmniej 4 znaki">
+							requiredMessage="#{txtRegister.loginRequired}"
+							validatorMessage="#{txtRegister.loginValidator}">
 							<f:validateLength minimum="4" />
 
 						</p:inputText>
@@ -30,9 +30,9 @@
 					</div>
 					<div class="field t">
 						<p:password id="password-1" value="#{registerBB.uzytkownik.haslo}"
-							required="true" placeholder="Hasło"
-							requiredMessage="Podaj hasło!"
-							validatorMessage="Hasło muszą się zgadzać" match="password-2">
+							required="true" placeholder="#{txtRegister.password}"
+							requiredMessage="#{txtRegister.passwordRequired}"
+							validatorMessage="#{txtRegister.passwordValidator}" match="password-2">
 							<f:validateLength minimum="4" />
 
 						</p:password>
@@ -40,9 +40,9 @@
 					</div>
 					<div class="field t">
 						<p:password id="password-2" value="#{registerBB.uzytkownik.haslo}"
-							required="true" placeholder="Powtórz hasło"
-							requiredMessage="Nie powtórzono hasła!"
-							validatorMessage="Hasło musi mieć min. 4 znaki!">
+							required="true" placeholder="#{txtRegister.passwordAgain}"
+							requiredMessage="#{txtRegister.passwordRequired}"
+							validatorMessage="#{txtRegister.passwordValidatorAgain}">
 							<f:validateLength minimum="4" />
 						</p:password>
 						<p:message for="password-2" />
@@ -51,15 +51,15 @@
 						<p:toggleSwitch value="#{registerBB.premium}" id="premium">
 						</p:toggleSwitch>
 						<p:outputLabel for="premium"
-							value="Chcę zostać użytkownikiem CreaNote+"
+							value="#{txtRegister.premium}"
 							style="margin-left: 20px" />
 					</div>
 					<div class="field">
 						<ul class="actions">
-							<li><p:commandButton value="Zarejestruj"
+							<li><p:commandButton value="#{txtRegister.register}"
 									action="#{registerBB.createAccount()}" update="@form"
 									class="primary" /></li>
-							<li><p:linkButton value="Mam już konto" outcome="login"
+							<li><p:linkButton value="#{txtRegister.logIn}" outcome="/public/login"
 									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
 						</ul>
 					</div>

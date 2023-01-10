@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="/templates/user-template.xhtml">
+
+	<ui:define name="title">#{txtSettings.settings}</ui:define>
+
+
+	<ui:define name="header">
+		<div class="inner">
+			<header styleClass="major" style="margin-bottom: -30px">
+			<h1>
+				#{txtSettings.userSettings} <span style="color: #8daa0c">#{remoteClient.details.login}</span>
+			</h1>
+			</header>
+		</div>
+		<div class="inner">
+
+			<article>
+			<ul class="actions">
+				<li><p:button rendered="#{remoteClient.isInRole('admin')}"
+						styleClass="primary" value="#{txtSettings.dashboard}" outcome="/pages/admin/admin"
+						style="background-color: #1cd78b" /></li>
+				<li><p:button rendered="#{!remoteClient.isInRole('admin')}"
+						styleClass="primary" value="#{txtSettings.myNotebooks}" outcome="notebooks"
+						style="background-color: #1cd78b" /></li>
+				<li><p:button id="changePassword" styleClass="primary"
+						value="#{txtSettings.changePassword}" onclick="PF('changePassword').show()" /></li>
+				<li><h:form>
+						<p:commandButton rendered="#{!remoteClient.isInRole('admin')}"
+							value="#{txtSettings.deleteAccount}" action="#{userSettings.deleteAccount()}"
+							class="primary" />
+					</h:form></li>
+			</ul>
+			<p:dialog widgetVar="changePassword" minHeight="40" width="350"
+				showEffect="fade">
+				<h:form>
+					<div class="fields">
+						<div class="field t">
+							<p:outputLabel for="password-1" value="#{txtSettings.newPassword}"
+								style="color:black" />
+							<p:password id="password-1" value="#{userSettings.haslo}"
+								match="password-2" required="true" placeholder="Hasło"
+								requiredMessage="#{txtSettings.passRequired}"
+								validatorMessage="#{txtSettings.passValidator}" style="color:black" />
+							<p:message for="password-1" />
+						</div>
+						<div class="field t">
+							<p:outputLabel for="password-1" value="#{txtSettings.confirmPassword}"
+								style="color:black" />
+							<p:password id="password-2" value="#{userSettings.haslo}"
+								required="true" placeholder="Hasło"
+								requiredMessage="#{txtSettings.passRequired2}"
+								validatorMessage="#{txtSettings.passValidator2}"
+								style="color:black">
+
+								<f:validateLength minimum="4" />
+							</p:password>
+
+							<p:message for="password-2" />
+						</div>
+
+					</div>
+					<h:commandButton value="#{txtSettings.save}"
+						action="#{userSettings.changePassword()}" update="@msg" style="border: 2px solid black; color:black;" />
+				</h:form>
+			</p:dialog> <header class="major">
+			<h2>#{txtSettings.stats}:</h2>
+			<p>
+				#{txtSettings.accountType}: <span style="color: rgb(9, 255, 0)">#{remoteClient.roles}</span>
+			</p>
+			<p>
+				#{txtSettings.created}: <span style="color: rgb(9, 255, 0)">#{remoteClient.details.dataUtworzenia}</span>
+			</p>
+			<p>
+				#{txtSettings.notebooksCount}:<span style="color: rgb(9, 255, 0)">
+					#{userSettings.notebooksCount}</span>
+			</p>
+			</header> </article>
+		</div>
+	</ui:define>
+
+	<ui:define name='content'>
+
+	</ui:define>
+</ui:composition>
+
+
+</html>

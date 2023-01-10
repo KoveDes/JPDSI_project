@@ -1,6 +1,8 @@
 package creanote.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -46,6 +48,7 @@ public class PrzypisanieRoliPK implements Serializable {
 			&& (this.idrola == castOther.idrola);
 	}
 
+	
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;

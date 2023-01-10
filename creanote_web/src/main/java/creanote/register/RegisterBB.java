@@ -5,8 +5,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.ejb.EJB;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIImportConstants;
@@ -44,6 +46,10 @@ public class RegisterBB implements Serializable {
 
 	@EJB
 	PrzypisanieRoliDAO przypisanieRoliDAO;
+	
+	@Inject
+	@ManagedProperty("#{txtRegister}")
+	private ResourceBundle txtRegister;
 
 	@Inject
 	FacesContext context;
@@ -59,7 +65,6 @@ public class RegisterBB implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
 	}
 
-	// Sprawdza czy login
 	public Boolean checkForDoubling() {
 		if (uzytkownikDAO.findByLogin(uzytkownik.getLogin()).isEmpty()) {
 			return true;
@@ -68,35 +73,21 @@ public class RegisterBB implements Serializable {
 		}
 	}
 
-	//
 	public void setRole() {
-		// premium i uzytkownik
-		// tworzymy obiekt przypisanieRoliPK, dodajemy id i podajemy jego id w
-		// PrzypisanieRoli
-
-		// Tworzymy obiekt PrzypisanieRoli (getid, setid) w setid podajemy obiekt
-		// przypisanieRoliPK
-		// Obiket PrzypisanieRoliPK tworzymy
-		// pobiermay id
 		Uzytkownik user = uzytkownikDAO.findByLogin(uzytkownik.getLogin()).get(0);
 		Integer idUser = user.getIduzytkownik();
 		przypisanieRoliPK.setIduzytkownik(idUser);
-
 		if (premium == true) {
-			// Rola premium idrola 2
 			przypisanieRoliPK.setIdrola(2);
-
 		} else {
-			// Rola user idrola 3
 			przypisanieRoliPK.setIdrola(3);
 		}
 		przypisanieRoli.setId(przypisanieRoliPK);
-		
+
 		przypisanieRoli.setDataNadania(new Date());
 		przypisanieRoli.setDataModyfikacji(new Date());
 		przypisanieRoliDAO.create(przypisanieRoli);
 	}
-	//
 
 	public String generateHashedPassword(String password) {
 		String hashedPassword = null;
@@ -128,14 +119,14 @@ public class RegisterBB implements Serializable {
 				setRole();
 				return "index";
 			} else {
-				addMessage(FacesMessage.SEVERITY_ERROR, "Istnieje już taki login", "");
+				addMessage(FacesMessage.SEVERITY_ERROR, txtRegister.getString("loginExists"), "");
 				return null;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "wystapił błąd poczas zapisu", null));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, txtRegister.getString("saveError"), null));
 			return "index";
 		}
 	}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewAction action="#{noteEdit.onLoad()}" />
+</f:metadata>
+
+<ui:composition template="/templates/form-template.xhtml">
+
+	<ui:define name="title">#{txtNote.title}</ui:define>
+
+	<ui:define name='content'>
+		<footer id="x">
+		<div class="inner">
+			<h:form>
+				<div class="fields">
+					<div class="field t">
+						<p:inputText value="#{noteEdit.notatka.nazwa}" id="title"
+							placeholder="#{txtNote.noteTitle}" requiredMessage="#{txtNote.titleR}"
+							required="true"
+							style="background-color: #3b14149e;color:white; border: 1px solid #7c91a500;">
+						</p:inputText>
+
+					</div>
+					<div class="field ">
+						<div class="col-12 md:col-6 lg:col-4 xl:col-3">
+							<p:selectOneListbox id="basic"
+								value="#{noteEdit.notatka.kategoria}" required="true"
+								requiredMessage="#{txtNote.categoryR}"
+								style="background-color: #3b14149e; border: 1px solid #7c91a500;">
+								<f:selectItem itemLabel="#{txtNote.work}" itemValue="#{txtNote.work}" />
+								<f:selectItem itemLabel="#{txtNote.studying}" itemValue="#{txtNote.studying}" />
+								<f:selectItem itemLabel="#{txtNote.health}" itemValue="#{txtNote.health}" />
+								<f:selectItem itemLabel="Fitness" itemValue="fitness" />
+								<f:selectItem itemLabel="#{txtNote.relationships}" itemValue="#{txtNote.relationships}" />
+								<f:selectItem itemLabel="#{txtNote.other}" itemValue="#{txtNote.others}" />
+							</p:selectOneListbox>
+
+						</div>
+
+					</div>
+					<div class="field">
+						<p:inputTextarea rows="2" cols="13"
+							value="#{noteEdit.notatka.tresc}" id="xd"
+							style="background-color: #3b14149e; color: white; border: 1px solid #7c91a500;"
+							required="true" requiredMessage="#{txtNote.contentR}" />
+
+					</div>
+					<div class="field">
+
+						<p:toggleSwitch value="#{noteEdit.publicNotatka}" id="public" />
+						<p:outputLabel for="public" value="#{txtNote.public}"
+							style="font-size: 0.9em; color: white; margin-left: 10px" />
+					</div>
+					<div class="field">
+						<ul class="actions">
+							<li><p:commandButton value="#{txtNote.save}"
+									action="#{noteEdit.createNotatka()}" update="@form"
+									class="primary" /></li>
+							<li><p:commandButton value="#{txtNote.cancel}"
+									action="#{noteEdit.goBack()}"
+									style="background-color: unset;border=color:white; padding: 6px 0; font-size: 1.1em" /></li>
+						</ul>
+					</div>
+				</div>
+				<p:growl id="msg" />
+			</h:form>
+		</div>
+		</footer>
+	</ui:define>
+</ui:composition>
+
+
+</html>
